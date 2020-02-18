@@ -52,6 +52,13 @@ public class Controller {
             System.out.println("Ugyldig navn oppgitt!");
         }
 
+        try{
+            DateCheck dato = new DateCheck(txtDato.getText());
+            System.out.println("du oppga følgende fødselsdato: " + dato.getDato());
+        } catch (Exception e){
+            System.out.println("feil fødselsdato oppgitt. Du ma skrive dd-mm-åååå");
+        }
+
     }
 
 }
