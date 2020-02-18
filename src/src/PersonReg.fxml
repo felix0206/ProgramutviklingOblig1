@@ -48,7 +48,7 @@
                 </Label>
                 <TextField fx:id="txtNavn" layoutX="147.0" layoutY="78.0" prefHeight="41.0" prefWidth="209.0" promptText="Skriv inn navn her" />
                 <TextField fx:id="txtAlder" layoutX="147.0" layoutY="137.0" prefHeight="41.0" prefWidth="209.0" promptText="Skriv inn alder her" />
-                <TextField fx:id="txtDato" layoutX="147.0" layoutY="201.0" prefHeight="41.0" prefWidth="209.0" promptText="Skriv inn fødselsdato her" />
+                <TextField fx:id="txtDag" layoutX="147.0" layoutY="201.0" prefHeight="41.0" prefWidth="49.0" promptText="DD" />
                 <TextField fx:id="txtEpost" layoutX="147.0" layoutY="269.0" prefHeight="41.0" prefWidth="209.0" promptText="Skriv inn epostadresse her" />
                 <TextField fx:id="txtTlf" layoutX="147.0" layoutY="337.0" prefHeight="41.0" prefWidth="209.0" promptText="Skriv inn moblinummer her" />
                 <Button layoutX="147.0" layoutY="418.0" mnemonicParsing="false" onAction="#Registrer" prefHeight="60.0" prefWidth="209.0" style="-fx-border-color: black; -fx-background-color: silver;" text="Registrer">
@@ -56,6 +56,8 @@
                         <Font name="PT Serif Bold Italic" size="21.0" />
                     </font>
                 </Button>
+            <TextField fx:id="txtMåned" layoutX="203.0" layoutY="201.0" prefHeight="41.0" prefWidth="49.0" promptText="MM" />
+            <TextField fx:id="txtAAr" layoutX="260.0" layoutY="201.0" prefHeight="41.0" prefWidth="96.0" promptText="ÅÅÅÅ" />
             </children>
         </AnchorPane>
     </children>

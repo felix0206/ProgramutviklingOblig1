@@ -14,7 +14,11 @@ public class Controller {
     @FXML
     private TextField txtEpost;
     @FXML
-    private TextField txtDato;
+    private TextField txtDag;
+    @FXML
+    private TextField txtMåned;
+    @FXML
+    private TextField txtAAr;
     @FXML
     private TextField txtTlf;
 
@@ -22,6 +26,14 @@ public class Controller {
 
     @FXML
     public void Registrer(ActionEvent event) {
+
+        try{
+        NameCheck navn = new NameCheck(txtNavn.getText());
+        System.out.println("Du skrev inn følgende navn: " + navn.getName());
+
+        }catch (Exception e){
+        System.out.println("Ugyldig navn oppgitt!");
+        }
         //sjekker alder og printer ut svar
         try {
             Alder alder = new Alder(Integer.parseInt(txtAlder.getText()));
@@ -42,21 +54,14 @@ public class Controller {
             PhoneCheck mobil = new PhoneCheck(txtTlf.getText());
             System.out.println("Du skrev inn følgende mobilnummer: " + mobil.getTelefon());
         }catch (NumberFormatException e){
-            System.out.println("Ugyldig mobilnummer!");
+            System.out.println("Ugyldig mobilnummer! * 8 siffre!");
         }
 
         try{
-            NameCheck navn = new NameCheck(txtNavn.getText());
-            System.out.println("Du skrev inn følgende navn: " + navn.getName());
-        }catch (Exception e){
-            System.out.println("Ugyldig navn oppgitt!");
-        }
-
-        try{
-            DateCheck dato = new DateCheck(txtDato.getText());
-            System.out.println("du oppga følgende fødselsdato: " + dato.getDato());
+            DateCheck dato = new DateCheck(txtDag.getText(),txtMåned.getText(),txtAAr.getText());
+            System.out.println("Du oppga følgende fødselsdato: " + dato.getDag() + "/" + dato.getMåned() + "/" + dato.getÅr());
         } catch (Exception e){
-            System.out.println("feil fødselsdato oppgitt. Du ma skrive dd-mm-åååå");
+            System.out.println("feil fødselsdato oppgitt!");
         }
 
     }
