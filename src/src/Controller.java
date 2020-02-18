@@ -45,6 +45,13 @@ public class Controller {
             System.out.println("Ugyldig mobilnummer!");
         }
 
+        try{
+            NameCheck navn = new NameCheck(txtNavn.getText());
+            System.out.println("Du skrev inn følgende navn: " + navn.getName());
+        }catch (Exception e){
+            System.out.println("Ugyldig navn oppgitt!");
+        }
+
     }
 
 }
