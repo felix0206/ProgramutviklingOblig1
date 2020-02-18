@@ -1,5 +1,3 @@
-package sample;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -10,15 +8,15 @@ import javafx.scene.control.TextField;
 public class Controller {
 
     @FXML
-   private TextField txtNavn;
+    private TextField txtNavn;
     @FXML
-   private TextField txtAlder;
+    private TextField txtAlder;
     @FXML
-   private TextField txtEpost;
+    private TextField txtEpost;
     @FXML
-   private TextField txtDato;
+    private TextField txtDato;
     @FXML
-   private TextField txtTlf;
+    private TextField txtTlf;
 
 
 
