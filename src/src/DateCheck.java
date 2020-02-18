@@ -3,9 +3,9 @@ public class DateCheck {
     String måned;
     String år;
 
-    String dagRegex = "[0-3][0-9]";
-    String månedRegex = "[0-1][0-9]";
-    String årRegex = "[1-2][0||9][0-9][0-9]";
+    String dagRegex = "(0?[1-9]|[12][0-9]|3[01])";
+    String månedRegex = "(0?[1-9]|1[012])";
+    String årRegex = "((19|20)\\d\\d)";
 
 
     public DateCheck(String dag, String måned , String år) {
