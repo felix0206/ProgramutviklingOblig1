@@ -56,7 +56,7 @@ public class Controller {
         }
 
         try{
-            DateCheck dato = new DateCheck(txtDag.getText(),txtMåned.getText(),txtAAr.getText());
+            DateCheck dato = new DateCheck(Integer.parseInt(txtDag.getText()),Integer.parseInt(txtMåned.getText()),Integer.parseInt(txtAAr.getText()));
             System.out.println("Du oppga følgende fødselsdato: " + dato.getDag() + "/" + dato.getMåned() + "/" + dato.getÅr());
         } catch (Exception e){
             System.out.println("feil fødselsdato oppgitt!");

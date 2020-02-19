@@ -1,43 +1,53 @@
 public class DateCheck {
-    String dag;
-    String måned;
-    String år;
 
-    String dagRegex = "(0?[1-9]|[12][0-9]|3[01])";
-    String månedRegex = "(0?[1-9]|1[012])";
-    String årRegex = "((19|20)\\d\\d)";
+   int dag;
+   int måned;
+   int år;
 
-
-    public DateCheck(String dag, String måned , String år) {
-
-        if (!dag.matches(dagRegex)){
-            throw new IllegalArgumentException("Ugyldig fødselsdag oppgitt!");
+    public DateCheck( int dag, int måned, int år) {
+        //Sjekker om dag er mellom 31 og 1.
+     if (dag < 1 || dag > 31 ){
+         throw new NumberFormatException("dag må være mellom 1 og 31");
         }
+     else{
+         this.dag = dag;
+         }
 
-        else{
-            this.dag = dag;
+     //sjekker om måned er mellom 1 og 12.
+     if (måned < 1 || måned > 12 ){
+            throw new NumberFormatException("måned må være mellom 1 og 12");
         }
-
-        if (!måned.matches(månedRegex)){
-            throw new IllegalArgumentException("Ugyldig måned oppgitt!");
-        }else{
+     //sjekker om dag er over 30 når det er en måned med bare 30 dager.
+     else if ((måned == 4 || måned == 6 || måned == 9 || måned == 11) && (dag < 1 || dag > 30)){
+         throw new NumberFormatException("Dag stemmer ikke overens med måned!");
+     }
+     //sjekker om dag er over 29 og måned er februar.
+     else if (måned == 2 && (dag < 1 || dag > 29)){
+         throw new NumberFormatException("Dag stemmer ikke overens med måned!");
+     }
+     //hvis ingen av de øvrige testene slår ut settes dag til gitt dag.
+     else{
             this.måned = måned;
+         }
+
+     // sjekker om årstallet er mellom 1900 og 2020
+     if (år < 1900 || år > 2020 ){
+         throw new NumberFormatException("årstall må være mellom 1900 og 2020");
+         }
+     else{
+         this.år = år;
         }
-        if (!år.matches(årRegex)){
-            throw new IllegalArgumentException("Ugyldig år oppgitt!");
-        }else{
-            this.år = år;
-        }
+
     }
-    public String getDag() {
+    public int getDag() {
         return dag;
     }
 
-    public String getMåned() {
+    public int getMåned() {
         return måned;
     }
 
-    public String getÅr() {
+    public int getÅr() {
         return år;
     }
 }
