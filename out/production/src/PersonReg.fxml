@@ -79,6 +79,15 @@
                               <Font name="Heiti SC Light" size="25.0" />
                            </font>
                         </Label>
+                        <TableView layoutX="2.0" layoutY="95.0" prefHeight="517.0" prefWidth="500.0">
+                          <columns>
+                            <TableColumn prefWidth="101.0" text="Navn" />
+                            <TableColumn prefWidth="86.0" text="Alder" />
+                              <TableColumn prefWidth="97.0" text="Fødselsdato" />
+                              <TableColumn prefWidth="104.0" text="Epost" />
+                              <TableColumn prefWidth="109.0" text="Mobilnummer" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
             </content>
