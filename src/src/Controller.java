@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Controller {
+public class Controller{
 
     @FXML
     private TextField txtNavn;
@@ -26,17 +26,17 @@ public class Controller {
     @FXML
     private TextField txtPath;
     @FXML
-    private TableColumn<String, Person> tblNavn;
+    private TableColumn<Person, String> tblNavn;
     @FXML
-    private TableColumn <String, Person> tblAlder;
+    private TableColumn<Person, String> tblAlder;
     @FXML
-    private TableColumn<String, Person> tblFødsel;
+    private TableColumn<Person, String> tblFødsel;
     @FXML
-    private TableColumn<String, Person> tblEpost;
+    private TableColumn<Person, String> tblEpost;
     @FXML
-    private TableColumn<String, Person> tblTlf;
+    private TableColumn<Person, String> tblTlf;
     @FXML
-    private static TableView tblView;
+    private static TableView<Person> tblView;
 
     @FXML
     public void Registrer(ActionEvent event) throws IOException {
@@ -50,7 +50,6 @@ public class Controller {
         try{
             System.out.println("Du skrev inn følgende navn: " + p.Navn(txtNavn.getText()));
             sb.append(txtNavn.getText() + ":::");
-
         }catch (Exception e){
         System.out.println("Ugyldig navn oppgitt!");
         }
@@ -89,9 +88,6 @@ public class Controller {
             fil.close();
         }
 
-
     }
-
-
 
 }
