@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<GridPane alignment="center" hgap="10" prefHeight="570.0" prefWidth="600.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+        <AnchorPane prefHeight="650.0" prefWidth="600.0">
+            <children>
+                <TableView fx:id="tableView" layoutX="11.0" layoutY="43.0" prefHeight="287.0" prefWidth="580.0">
+                    <columns>
+                        <TableColumn fx:id="tblNavn" prefWidth="98.0" text="Navn">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="txtData" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="tblAlder" prefWidth="101.0" text="Alder">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="intData" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="120.0" text="Fødselsdato">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="intFødsel" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="137.0" text="Epostadresse">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="txtEpost" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="126.0" text="Mobilnummer">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="intTlf" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <Button layoutX="300.0" layoutY="451.0" mnemonicParsing="false" onAction="#addElemBtnClicked" prefHeight="55.0" prefWidth="224.0" text="Registrer" />
+                <TextField fx:id="txtField" layoutX="27.0" layoutY="341.0" prefHeight="27.0" prefWidth="224.0" promptText="Navn" />
+                <TextField fx:id="intField" layoutX="27.0" layoutY="403.0" prefHeight="27.0" prefWidth="224.0" promptText="Alder" />
+                <TextField fx:id="intDag" layoutX="27.0" layoutY="465.0" prefHeight="27.0" prefWidth="52.0" promptText="DD" />
+                <TextField fx:id="txtEpost" layoutX="300.0" layoutY="341.0" prefHeight="27.0" prefWidth="224.0" promptText="Epost" />
+                <TextField fx:id="intMobil" layoutX="300.0" layoutY="403.0" prefHeight="27.0" prefWidth="224.0" promptText="Mobilnummer" />
+                <TextField fx:id="intMåned" layoutX="101.0" layoutY="465.0" prefHeight="27.0" prefWidth="52.0" promptText="MM" />
+                <TextField fx:id="intÅr" layoutX="180.0" layoutY="465.0" prefHeight="27.0" prefWidth="71.0" promptText="ÅÅÅÅ" />
+                <Label layoutX="27.0" layoutY="438.0" prefHeight="27.0" prefWidth="224.0" text="Fødselsdato:" />
+                <MenuBar layoutX="10.0" layoutY="8.0" prefHeight="27.0" prefWidth="580.0">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#saveToFile" text="Save" />
+                                <MenuItem mnemonicParsing="false" onAction="#LoadFile" text="Load" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>

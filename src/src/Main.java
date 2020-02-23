@@ -8,9 +8,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("PersonReg.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Datamodel.fxml"));
         primaryStage.setTitle("Personregistrering");
-        primaryStage.setScene(new Scene(root, 500, 650));
+        primaryStage.setScene(new Scene(root, 600, 570));
         primaryStage.show();
     }
 

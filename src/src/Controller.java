@@ -1,93 +1,178 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Controller{
+public class Controller implements Initializable {
+
+    private StringBuilder sb = new StringBuilder();
+
+    //TODO: vi skal egt bruke disse nedenfor, men jeg skjønte ikke helt hvordan man gjorde det :)
+   /* interface FileOpener{
+
+    }
+
+    interface FileSaver {
+        StringBuilder sb = new StringBuilder();
+        File file = new File("");
+       // FileWriter fil = new FileWriter(file);
+    }
+
+    class FileOpenerTxt implements FileOpener{
+
+    }
+
+    class FileSaverTxt implements FileSaver{
+
+    }*/
+
+    InvalidPersonException e = new InvalidPersonException("");
 
     @FXML
-    private TextField txtNavn;
+    private TableView tableView;
+
     @FXML
-    private TextField txtAlder;
+    private TextField txtField;
+    @FXML
+    private TextField intField;
+    @FXML
+    private TextField intDag;
+    @FXML
+    private TextField intMåned;
+    @FXML
+    private TextField intÅr;
     @FXML
     private TextField txtEpost;
     @FXML
-    private TextField txtDag;
-    @FXML
-    private TextField txtMåned;
-    @FXML
-    private TextField txtAAr;
-    @FXML
-    private TextField txtTlf;
-    @FXML
-    private TextField txtPath;
-    @FXML
-    private TableColumn<Person, String> tblNavn;
-    @FXML
-    private TableColumn<Person, String> tblAlder;
-    @FXML
-    private TableColumn<Person, String> tblFødsel;
-    @FXML
-    private TableColumn<Person, String> tblEpost;
-    @FXML
-    private TableColumn<Person, String> tblTlf;
-    @FXML
-    private static TableView<Person> tblView;
+    private TextField intMobil;
+
+    DataCollection collection = new DataCollection();
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        collection.attachTableView(tableView);
+    }
+
+
 
     @FXML
-    public void Registrer(ActionEvent event) throws IOException {
+    private void LoadFile(ActionEvent event){
 
-        Person p = new Person(txtNavn.getText(),Integer.parseInt(txtAlder.getText()),txtEpost.getText(),Integer.parseInt(txtTlf.getText()),txtAAr.getText());
-        StringBuilder sb = new StringBuilder();
+        //TODO: Fikse hele denne metoden. Nå gjør den egentlig ingenting.
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("FileChooser");
 
-        File file = new File(txtPath.getText()+"RegistrertePersoner.txt/");
-        FileWriter fil = new FileWriter(file);
+        Stage stage = new Stage();
+        stage.setY(250);
+        stage.setX(200);
 
-        try{
-            System.out.println("Du skrev inn følgende navn: " + p.Navn(txtNavn.getText()));
-            sb.append(txtNavn.getText() + ":::");
-        }catch (Exception e){
-        System.out.println("Ugyldig navn oppgitt!");
-        }
-        //sjekker alder og printer ut svar
-        try {
-            System.out.println("Du skrev inn følgende alder: " + p.Alder(Integer.parseInt(txtAlder.getText())));
-            sb.append(txtAlder.getText() + ":::");
-        } catch (NumberFormatException e){
-            System.out.println("Ugyldig heltall!");
-        }
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
 
-        //sjekker email og printer ut svar
-        try{
-            System.out.println("Du skrev inn følgende email: " + p.Epost(txtEpost.getText()));
-            sb.append(txtEpost.getText() + ":::");
-        } catch (Exception e){
-            System.out.println("Ugyldig email!");
-        }
+        fileChooser.showOpenDialog(stage);
+    }
 
-        try{
-            System.out.println("Du skrev inn følgende mobilnummer: " + p.Tlf(txtTlf.getText()));
-            sb.append(txtTlf.getText() + ":::");
-        }catch (NumberFormatException e){
-            System.out.println("Ugyldig mobilnummer! * 8 siffre!");
-        }
+    @FXML
+    private void addElemBtnClicked() {
+        DataModell obj = createDataModelObjectFromGUI();
 
-        try{
-            System.out.println("Du oppga følgende fødselsdato: " + p.FødselsDato(Integer.parseInt(txtDag.getText()),Integer.parseInt(txtMåned.getText()),Integer.parseInt(txtAAr.getText())));
-            sb.append(p.FødselsDato(Integer.parseInt(txtDag.getText()),Integer.parseInt(txtMåned.getText()),Integer.parseInt(txtAAr.getText())));
-        } catch (Exception e){
-            System.out.println("feil fødselsdato oppgitt!");
-        }
-
-        if (txtPath.getText() != null){
-            fil.write(sb.toString());
-            fil.close();
+        if(obj != null) {
+            resetTxtFields();
+            collection.addElement(obj);
         }
 
     }
 
+
+
+    private DataModell createDataModelObjectFromGUI() {
+
+        try {
+            //"tom" person opprettes, skal senere fylles inn.
+            DataModell data = new DataModell(null,0,null,null,null);
+
+            //oppretter hjelpeverdier
+            String txt = txtField.getText();   //txt = navn
+            String epost = txtEpost.getText();
+            int i = Integer.parseInt(intField.getText()); // i = alder
+            String dag = intDag.getText();
+            String måned = intMåned.getText();
+            String år = intÅr.getText();
+            String fødsel = dag + "." + måned + "-" + år;
+            String mobil = intMobil.getText();
+
+            //Kjører igjennom tester for å sjekke om verdiene er korrekte.
+            //og fyller inn i data (ny person).
+            data.Navn(txt);
+            data.Alder(i);
+            data.Epost(epost);
+            data.FødselsDato(fødsel);
+            data.Tlf(mobil);
+            //tester slutt
+
+            //Legger inn i stringbuilderen sb, i tilfelle brukeren skal lagre til fil.
+
+            //TODO: gjøre sånn at den ikke lagrer når noe feil blir skrevet.
+            sb.append( "ny person: " + "\n \n"+"Navn: " + data.Navn(txt) + ", ");
+            sb.append("Alder: " + data.Alder(i) + ", ");
+            sb.append("Fødselsdato: " + data.FødselsDato(fødsel) + ", ");
+            sb.append("Epostadresse: " + data.Epost(epost) + ", ");
+            sb.append("Mobilnummer: " + data.Tlf(mobil) + "\n \n");
+            //innlegging slutt
+
+            //hvis noen av textfieldene er null eller 0, så fylles ikke kolonnene inn.
+            if (data.getIntTlf() == null || data.getIntData() == 0 || data.getIntFødsel() == null
+                    || data.getTxtData() == null || data.getTxtEpost() == null)
+            {
+                return null;
+            }
+
+            return data;
+        } catch (IllegalArgumentException e) {
+            intField.setText("<< Positivt nummer under 120!>>");
+            intMobil.setText("<<Åtte numre (norsk nummer)>>");
+            txtField.setText("<<Navn kan ikke inneholde numre eller være tom!>>");
+            txtEpost.setText("<<Epost må være eksempel@noe.noe>>");
+            return null;
+        }
+    }
+
+    @FXML
+    private void saveToFile(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("FileSaver");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+
+        Stage stage = new Stage();
+        stage.setY(250);
+        stage.setX(200);
+
+
+        File file = fileChooser.showSaveDialog(stage);
+        File nyFile = new File(file.getAbsolutePath());
+
+        FileWriter fil = new FileWriter(nyFile);
+        fil.write(sb.toString());
+        fil.close();
+
+    }
+
+    private void resetTxtFields() {
+        txtField.setText("");
+        intField.setText("");
+        intDag.setText("");
+        intMåned.setText("");
+        intÅr.setText("");
+        txtEpost.setText("");
+        intMobil.setText("");
+    }
 }
