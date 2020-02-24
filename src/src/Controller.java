@@ -44,20 +44,12 @@ public class Controller implements Initializable {
 
 
     @FXML
-    private void LoadFile(ActionEvent event){
+    private void LoadFile(ActionEvent event) throws IOException {
+        FileOpenerTxt fileOpener = new FileOpenerTxt();
+        fileOpener.velgFil();
 
-        //TODO: Fikse hele denne metoden. Nå gjør den egentlig ingenting.
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("FileChooser");
+        fileOpener.lesFil();
 
-        Stage stage = new Stage();
-        stage.setY(250);
-        stage.setX(200);
-
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-
-        fileChooser.showOpenDialog(stage);
     }
 
     @FXML
