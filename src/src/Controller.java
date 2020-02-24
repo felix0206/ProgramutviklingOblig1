@@ -15,25 +15,6 @@ public class Controller implements Initializable {
 
     private StringBuilder sb = new StringBuilder();
 
-    //TODO: vi skal egt bruke disse nedenfor, men jeg skjønte ikke helt hvordan man gjorde det :)
-   /* interface FileOpener{
-
-    }
-
-    interface FileSaver {
-        StringBuilder sb = new StringBuilder();
-        File file = new File("");
-       // FileWriter fil = new FileWriter(file);
-    }
-
-    class FileOpenerTxt implements FileOpener{
-
-    }
-
-    class FileSaverTxt implements FileSaver{
-
-    }*/
-
     InvalidPersonException e = new InvalidPersonException("");
 
     @FXML
@@ -60,7 +41,6 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         collection.attachTableView(tableView);
     }
-
 
 
     @FXML
@@ -91,8 +71,6 @@ public class Controller implements Initializable {
 
     }
 
-
-
     private DataModell createDataModelObjectFromGUI() {
 
         try {
@@ -119,14 +97,13 @@ public class Controller implements Initializable {
             //tester slutt
 
             //Legger inn i stringbuilderen sb, i tilfelle brukeren skal lagre til fil.
-
             //TODO: gjøre sånn at den ikke lagrer når noe feil blir skrevet.
-            sb.append( "ny person: " + "\n \n"+"Navn: " + data.Navn(txt) + ", ");
-            sb.append("Alder: " + data.Alder(i) + ", ");
-            sb.append("Fødselsdato: " + data.FødselsDato(fødsel) + ", ");
-            sb.append("Epostadresse: " + data.Epost(epost) + ", ");
-            sb.append("Mobilnummer: " + data.Tlf(mobil) + "\n \n");
-            //innlegging slutt
+                sb.append( "ny person: " + "\n \n"+"Navn: " + data.Navn(txt) + ", ");
+                sb.append("Alder: " + data.Alder(i) + ", ");
+                sb.append("Fødselsdato: " + data.FødselsDato(fødsel) + ", ");
+                sb.append("Epostadresse: " + data.Epost(epost) + ", ");
+                sb.append("Mobilnummer: " + data.Tlf(mobil) + "\n \n");
+                //innlegging slutt
 
             //hvis noen av textfieldene er null eller 0, så fylles ikke kolonnene inn.
             if (data.getIntTlf() == null || data.getIntData() == 0 || data.getIntFødsel() == null
@@ -147,22 +124,9 @@ public class Controller implements Initializable {
 
     @FXML
     private void saveToFile(ActionEvent event) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("FileSaver");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
 
-        Stage stage = new Stage();
-        stage.setY(250);
-        stage.setX(200);
-
-
-        File file = fileChooser.showSaveDialog(stage);
-        File nyFile = new File(file.getAbsolutePath());
-
-        FileWriter fil = new FileWriter(nyFile);
-        fil.write(sb.toString());
-        fil.close();
+        FileSaverTxt lagre = new FileSaverTxt();
+        lagre.lesfil(sb);
 
     }
 
